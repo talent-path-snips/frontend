@@ -1,163 +1,83 @@
+/* eslint-disable jsx-a11y/label-has-for */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import axios from 'axios';
 import './App.css';
 import '../css/style.css';
-import Snip from './Snip';
+import SnipList from './SnipList';
+import SearchBar from './SearchBar';
 
-const snippetData = [
-  {
-    id: 1,
-    code: 'const america = 1776',
-    title: 'freedom',
-    description: 'I declared a const',
-    favorites: 0,
-    author: null,
-    language: null,
-  },
-  {
-    id: 3,
-    code: 'const america = 1776',
-    title: 'freedom',
-    description: 'I declared a const',
-    favorites: 0,
-    author: null,
-    language: null,
-  },
-  {
-    id: 4,
-    code: 'const america = 1776',
-    title: 'freedom',
-    description: 'I declared a const',
-    favorites: 0,
-    author: null,
-    language: null,
-  },
-  {
-    id: 5,
-    code: 'const america = 1776',
-    title: 'freedom',
-    description: 'I declared a const',
-    favorites: 0,
-    author: null,
-    language: null,
-  },
-  {
-    id: 6,
-    code: 'const america = 1776',
-    title: 'freedom',
-    description: 'I declared a const',
-    favorites: 0,
-    author: null,
-    language: null,
-  },
-  {
-    id: 7,
-    code: 'const america = 1776',
-    title: 'freedom',
-    description: 'I declared a const',
-    favorites: 0,
-    author: null,
-    language: null,
-  },
-  {
-    id: 8,
-    code: 'const america = 1776',
-    title: 'freedom',
-    description: 'I declared a const',
-    favorites: 0,
-    author: null,
-    language: null,
-  },
-  {
-    id: 9,
-    code: 'const america = 1776',
-    title: 'freedom',
-    description: 'I declared a const',
-    favorites: 0,
-    author: null,
-    language: null,
-  },
-  {
-    id: 10,
-    code: 'const america = 1776',
-    title: 'freedom',
-    description: 'I declared a const',
-    favorites: 0,
-    author: null,
-    language: null,
-  },
-  {
-    id: 12,
-    code: 'const myVar = 4;',
-    title: 'const.js',
-    description: 'This is how you declare a const variable in JS',
-    favorites: 0,
-    author: 'Ayana',
-    language: 'JavaScript',
-  },
-  {
-    id: 13,
-    code: 'const myVar = 4;',
-    title: 'const.js',
-    description: 'This is how you declare a const variable in JS',
-    favorites: 0,
-    author: 'Ayana',
-    language: 'JavaScript',
-  },
-  {
-    id: 14,
-    code: 'const myVar = 4;',
-    title: 'const.js',
-    description: 'This is how you declare a const variable in JS',
-    favorites: 0,
-    author: 'Ayana',
-    language: 'JavaScript',
-  },
-  {
-    id: 11,
-    code: 'const myVar = 4;',
-    title: 'const.js',
-    description: 'This is how you declare a const variable in JS',
-    favorites: 0,
-    author: 'Dandy',
-    language: 'JavaScript',
-  },
-];
+class App extends React.Component {
+  constructor(props) {
+    // call parent (React.Component) constructor
+    super(props);
 
-function App() {
-  return (
-    <React.Fragment>
-      <header>
-        <nav>
-          <ul>
-            <li>
-              <a href="/">Home</a>
-            </li>
-            <li>
-              <a href="about.html">About</a>
-            </li>
-            <li>
-              <a href="snippets.html">Snippets</a>
-            </li>
-            <li>
-              <a href="account.html"> Account</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <form id="search">
-        <label htmlFor="search-text">
-          <span className="icon">🔎</span>
-        </label>
-        <input type="text" name="search-text" id="search-text" />
-        <button type="submit">Search</button>
-      </form>
-      <section id="snippets">
-        {snippetData.map(snippet => (
-          <Snip snippet={snippet} />
-        ))}
-      </section>
-    </React.Fragment>
-  );
+    // set intial state
+    this.state = {
+      snippets: [],
+    };
+  }
+
+  async componentDidMount() {
+    console.log('App Mounted');
+    // 1. request the data from our server
+    const { data } = await axios.get('http://localhost:5000/api/snippets');
+    // 2. hold that data in state so that it will be passed down to our Snips
+    this.setState({
+      snippets: data,
+    });
+  }
+
+  fetchSnippets = async searchText => {
+    // fetch snippets from database
+    const { data: snippets } = await axios.get(
+      'http://localhost:5000/api/snippets'
+    );
+
+    // inner function for string matching
+    const matchStr = (str, toMatch) =>
+      str.toLowerCase().includes(toMatch.toLowerCase());
+    // filter them
+    const filteredSnips = snippets.filter(
+      snippet =>
+        matchStr(snippet.title || '', searchText) ||
+        matchStr(snippet.description || '', searchText) ||
+        matchStr(snippet.code || '', searchText) ||
+        matchStr(snippet.language || '', searchText)
+    );
+
+    // set state
+    this.setState({
+      snippets: filteredSnips,
+    });
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <header>
+          <nav>
+            <ul>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="about.html">About</a>
+              </li>
+              <li>
+                <a href="snippets.html">Snippets</a>
+              </li>
+              <li>
+                <a href="account.html"> Account</a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <SearchBar onSearch={this.fetchSnippets} />
+        <SnipList snippets={this.state.snippets} />
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
