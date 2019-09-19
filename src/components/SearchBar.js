@@ -28,7 +28,9 @@ export default class SearchBar extends React.Component {
     return (
       <form id="search" onSubmit={this.handleSubmit}>
         <label htmlFor="search-text">
-          <span className="icon">🔎</span>
+          <span role="img" className="icon">
+            🔎
+          </span>
         </label>
         <input
           type="text"
