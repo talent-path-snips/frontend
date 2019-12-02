@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class About extends Component {
+export default class FourOhFourPage extends Component {
   static propTypes = {};
 
   render() {
-    return <div />;
+    return <div>You done found the wrong path!</div>;
   }
 }
