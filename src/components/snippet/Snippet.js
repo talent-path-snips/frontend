@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import hljs from 'highlightjs';
+import './Snippet.css';
 import 'highlightjs/styles/ocean.css';
 
-export default class Snip extends React.Component {
+export default class Snippet extends React.Component {
   static propTypes = {
     snippet: PropTypes.shape({
       title: PropTypes.string,

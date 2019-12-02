@@ -3,10 +3,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-import Header from './Header';
-import Pages from './pages/index';
+import Header from '../header/Header';
+import Pages from '../pages/index';
 import './App.css';
-import '../css/style.css';
 
 class App extends React.Component {
   componentDidMount() {
@@ -41,24 +40,30 @@ class App extends React.Component {
   };
 
   render() {
-    const { Home, About, Snippets, Account, FourOhFour } = Pages;
+    const {
+      HomePage,
+      AboutPage,
+      SnippetsPage,
+      AccountPage,
+      FourOhFourPage,
+    } = Pages;
     return (
       <Router>
         <Header />
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/about" exact component={About} />
-          <Route path="/snippets" component={Snippets} />
+          <Route path="/" exact component={HomePage} />
+          <Route path="/about" exact component={AboutPage} />
+          <Route path="/snippets" component={SnippetsPage} />
           <Route
             path="/account"
             render={() => (
-              <Account
+              <AccountPage
                 onLogin={this.submitLogin}
                 onRegister={this.submitRegistration}
               />
             )}
           />
-          <Route component={FourOhFour} />
+          <Route component={FourOhFourPage} />
         </Switch>
       </Router>
     );

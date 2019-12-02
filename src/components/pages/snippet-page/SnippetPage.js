@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import SearchBar from '../SearchBar';
-import SnipList from '../SnipList';
+import SearchBar from '../../search-bar';
+import SnipList from '../../snippet-list';
 
 export default class Snippets extends Component {
   static propTypes = {};

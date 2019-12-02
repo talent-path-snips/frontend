@@ -1,13 +1,13 @@
-import About from './About';
-import Account from './Account';
-import Home from './Home';
-import Snippets from './Snippets';
-import FourOhFour from './FourOhFour';
+import AboutPage from './about-page';
+import AccountPage from './account-page';
+import HomePage from './home-page';
+import SnippetsPage from './snippet-page';
+import FourOhFourPage from './fourohfour-page';
 
 export default {
-  About,
-  Account,
-  Home,
-  Snippets,
-  FourOhFour,
+  AboutPage,
+  AccountPage,
+  HomePage,
+  SnippetsPage,
+  FourOhFourPage,
 };
