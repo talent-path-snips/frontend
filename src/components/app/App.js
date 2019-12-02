@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-for */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
@@ -40,30 +38,20 @@ class App extends React.Component {
   };
 
   render() {
-    const {
-      HomePage,
-      AboutPage,
-      SnippetsPage,
-      AccountPage,
-      FourOhFourPage,
-    } = Pages;
+    const { HomePage, SnippetsPage, FourOhFourPage } = Pages;
     return (
       <Router>
         <Header />
         <Switch>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/about" exact component={AboutPage} />
-          <Route path="/snippets" component={SnippetsPage} />
-          <Route
-            path="/account"
-            render={() => (
-              <AccountPage
-                onLogin={this.submitLogin}
-                onRegister={this.submitRegistration}
-              />
-            )}
-          />
-          <Route component={FourOhFourPage} />
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
+          <Route path="/snippets">
+            <SnippetsPage />
+          </Route>
+          <Route>
+            <FourOhFourPage />
+          </Route>
         </Switch>
       </Router>
     );
