@@ -12,13 +12,7 @@ export default class Header extends Component {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
               <Link to="/snippets">Snippets</Link>
-            </li>
-            <li>
-              <Link to="/account"> Account</Link>
             </li>
           </ul>
         </nav>

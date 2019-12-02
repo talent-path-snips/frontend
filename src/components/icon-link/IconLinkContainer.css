@@ -1,0 +1,17 @@
+#competitors {
+  background-color: var(--snips-purple);
+}
+
+#competitors h2 {
+  padding: 2rem;
+  text-align: center;
+}
+
+.icon-link-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 60%;
+  margin: auto;
+  padding: 2rem;
+}
