@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
-import SignupForm from '../../signup-form';
-import LoginForm from '../../login-form';
+import AccountForm from '../../account-form';
 
 export default class AccountPage extends Component {
   static propTypes = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogin: false,
+    };
+  }
 
   render() {
-    return (
-      <>
-        <LoginForm onSubmit={this.props.onLogin} />
-        <SignupForm onSubmit={this.props.onRegister} />
-      </>
+    //HACK: Short circuiting the design with a single form
+    return this.state.isLogin ? (
+      <AccountForm onSubmit={this.props.onLogin} />
+    ) : (
+      <AccountForm onSubmit={this.props.onSignup} />
     );
   }
 }

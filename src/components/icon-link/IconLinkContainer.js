@@ -15,21 +15,25 @@ export default class IconLinkContainer extends Component {
     this.state = {
       competitorsInfo: [
         {
+          id: 1,
           href: 'https://stackoverflow.com/',
           imageSrc: stackOverflowLogo,
           imageAlt: 'Colored StackOverflow brand logo',
         },
         {
+          id: 2,
           href: 'https://wesbos.com/',
           imageSrc: wesBosLogo,
           imageAlt: 'Colored Wes Bos brand logo',
         },
         {
+          id: 3,
           href: 'https://codepen.io/',
           imageSrc: codePenLogo,
           imageAlt: 'Colored CodePen brand logo',
         },
         {
+          id: 4,
           href: 'https://dribble.com/',
           imageSrc: dribbbleLogo,
           imageAlt: 'Colored Dribbble brand logo',
@@ -43,7 +47,7 @@ export default class IconLinkContainer extends Component {
         <h2>Competitors</h2>
         <div className="icon-link-container">
           {this.state.competitorsInfo.map(competitor => (
-            <IconLink info={competitor} />
+            <IconLink key={competitor.id} info={competitor} />
           ))}
         </div>
       </section>
