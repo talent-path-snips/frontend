@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import PropTypes from 'prop-types';
+import axios from '../../../utils/axios';
 import SearchBar from '../../search-bar';
 import SnipList from '../../snippet-list';
 
@@ -18,11 +17,8 @@ export default class Snippets extends Component {
   }
 
   async componentDidMount() {
-    console.log('App Mounted');
     // 1. request the data from our server
-    const { data } = await axios.get(
-      'https://maney-snips.herokuapp.com/api/snippets'
-    );
+    const { data } = await axios.get(`/snippets`);
     // 2. hold that data in state so that it will be passed down to our Snips
     this.setState({
       snippets: data,
@@ -31,9 +27,7 @@ export default class Snippets extends Component {
 
   fetchSnippets = async searchText => {
     // fetch snippets from database
-    const { data: snippets } = await axios.get(
-      'https://maney-snips.herokuapp.com/api/snippets'
-    );
+    const { data: snippets } = await axios.get('/snippets');
 
     // inner function for string matching
     const matchStr = (str, toMatch) =>

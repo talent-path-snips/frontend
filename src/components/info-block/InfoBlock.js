@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './InfoBlock.css';
 
 const InfoBlock = props => (
@@ -7,5 +8,13 @@ const InfoBlock = props => (
     <p>{props.info.textInfo}</p>
   </div>
 );
+
+InfoBlock.propTypes = {
+  info: PropTypes.shape({
+    imageSrc: PropTypes.string.isRequired,
+    imageAlt: PropTypes.string.isRequired,
+    textInfo: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default InfoBlock;

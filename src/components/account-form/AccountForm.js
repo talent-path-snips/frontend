@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export default class SignupForm extends Component {
+export default class AccountForm extends Component {
   constructor(props) {
     super(props);
 
@@ -30,7 +31,7 @@ export default class SignupForm extends Component {
         <div className="signupForm">
           <h2>Sign Up</h2>
           <form onSubmit={this.handleSubmit}>
-            <label className="halfwidth">
+            <label htmlFor="name" className="halfwidth">
               Name
               <input
                 name="name"
@@ -39,7 +40,7 @@ export default class SignupForm extends Component {
                 onChange={event => this.handleChange(event, 'name')}
               />
             </label>
-            <label className="halfwidth">
+            <label htmlFor="password" className="halfwidth">
               Password
               <input
                 name="password"
@@ -55,3 +56,7 @@ export default class SignupForm extends Component {
     );
   }
 }
+
+AccountForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

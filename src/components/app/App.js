@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import Header from '../header/Header';
 import Pages from '../pages/index';
 import './App.css';
@@ -9,20 +9,14 @@ class App extends React.Component {
   componentDidMount() {
     this.setToken();
   }
-  submitRegistration = async registrationData => {
+  submitSignup = async signupData => {
     console.log('Hello from Signup');
-    const res = await axios.post(
-      `${process.env.REACT_APP_API_URL}/signup`,
-      registrationData
-    );
+    const res = await axios.post(`/signup`, signupData);
     console.log(res);
   };
   submitLogin = async loginData => {
     console.log('Hello from Login', loginData);
-    const res = await axios.post(
-      `${process.env.REACT_APP_API_URL}/login`,
-      loginData
-    );
+    const res = await axios.post(`/login`, loginData);
     localStorage.setItem('app-token', res.data.token);
     this.setToken(res.data.token);
   };

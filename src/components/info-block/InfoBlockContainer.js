@@ -13,18 +13,21 @@ export default class InfoBlockContainer extends Component {
     this.state = {
       marketingInfo: [
         {
+          id: 1,
           imageSrc: beAwesomeImage,
           imageAlt: 'Snip 1',
           textInfo:
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repudiandae dolor maxime libero, autem veniam non ea porro quisquam maiores itaque hic, ut quod doloremque ipsum quis mollitia magni esse?',
         },
         {
+          id: 2,
           imageSrc: snippetImage,
           imageAlt: 'Snip 2',
           textInfo:
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repudiandae dolor maxime libero, autem veniam non ea porro quisquam maiores itaque hic, ut quod doloremque ipsum quis mollitia magni esse?',
         },
         {
+          id: 3,
           imageSrc: pythonTweetImage,
           imageAlt: 'Snip 3',
           textInfo:
@@ -37,7 +40,7 @@ export default class InfoBlockContainer extends Component {
     return (
       <section>
         {this.state.marketingInfo.map(infoBlock => (
-          <InfoBlock info={infoBlock} />
+          <InfoBlock key={infoBlock.id} info={infoBlock} />
         ))}
       </section>
     );
